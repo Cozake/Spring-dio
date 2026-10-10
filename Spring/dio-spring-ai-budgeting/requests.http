@@ -1,0 +1,59 @@
+### Exemplos de requisicoes (IntelliJ HTTP Client / VS Code REST Client)
+@host = http://localhost:8080
+
+### 1) Criar uma despesa
+POST {{host}}/api/transactions
+Content-Type: application/json
+
+{
+  "description": "Almoço no restaurante",
+  "amount": 45.90,
+  "type": "EXPENSE",
+  "category": "Alimentação"
+}
+
+### 2) Criar uma receita
+POST {{host}}/api/transactions
+Content-Type: application/json
+
+{
+  "description": "Salário",
+  "amount": 3500,
+  "type": "INCOME",
+  "category": "Salário"
+}
+
+### 3) Testar a validação (valor negativo e descrição vazia -> 400)
+POST {{host}}/api/transactions
+Content-Type: application/json
+
+{
+  "description": "",
+  "amount": -10,
+  "type": "EXPENSE"
+}
+
+### 4) Listar transações (filtros opcionais: start, end, type, category)
+GET {{host}}/api/transactions?type=EXPENSE
+
+### 5) Saldo
+GET {{host}}/api/transactions/balance
+
+### 6) NOVA CONSULTA: despesas por categoria
+GET {{host}}/api/transactions/spending-by-category
+
+### 7) Comando por TEXTO (usa IA + Tool Calling, mas sem áudio)
+POST {{host}}/api/ai/text-command
+Content-Type: application/json
+
+{
+  "text": "Gastei 32 reais e 50 no mercado hoje"
+}
+
+### 8) Comando por TEXTO - consulta
+POST {{host}}/api/ai/text-command
+Content-Type: application/json
+
+{
+  "text": "Com o que eu mais gastei este mês?"
+}
